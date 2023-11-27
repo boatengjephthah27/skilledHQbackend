@@ -44,15 +44,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all().order_by('-date')
     serializer_class = OrderSerializer
 
-    def get_queryset(self):
-        client_id = self.request.query_params.get('client_id')
-        if client_id:
-            client_orders = Order.objects.filter(user__id=client_id)
-
-            return client_orders
-
-        return Order.objects.none()
-
     def get_queryset(self, request):
         client_id = self.request.query_params.get('client_id')
         if client_id:
