@@ -53,6 +53,15 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         return Order.objects.none()
 
+    def get_queryset(self):
+        client_id = self.request.query_params.get('client_id')
+        if client_id:
+            client_orders = Order.objects.filter(user=client_id)
+
+            return client_orders
+
+        return Order.objects.none()
+
     def _querydict_to_dict(self, query_dict):
         def clean_key_value(key, value):
             if "\n" in key:
