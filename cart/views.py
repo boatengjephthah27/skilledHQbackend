@@ -53,7 +53,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
         return Order.objects.none()
 
-    def get_queryset(self):
+    def get_queryset(self, request):
         client_id = self.request.query_params.get('client_id')
         if client_id:
             client_orders = Order.objects.filter(user=client_id)
