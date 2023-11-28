@@ -47,7 +47,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self, request):
         client_id = self.request.query_params.get('client_id')
         if client_id:
-            client_orders = Order.objects.filter(user=client_id)
+            client_orders = Order.objects.filter(user__id=client_id)
 
             return client_orders
 
